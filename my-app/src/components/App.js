@@ -7,7 +7,7 @@ import FriendListItem from './FriendListItem'
 
 
 function App() {
-  FriendListItem();
+
   return (
     <div className="App">
       
