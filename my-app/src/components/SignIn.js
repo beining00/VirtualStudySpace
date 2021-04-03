@@ -1,13 +1,13 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import firebase from './Firebase';
+import firebase , {auth}from './Firebase';
 
 
 
 
 
 
-const auth = firebase.auth();
+
 
 
 
@@ -66,5 +66,5 @@ function SignIn(props){
 
 }
 
-export {SignOut, auth}; 
+export {SignOut}; 
 export default SignIn; 

@@ -37,6 +37,8 @@ function Layout() {
     const onChangeGoal = (event) => {
         setGoal(event.target.value);
     };
+    // user state  
+    const [user] = useAuthState(auth);
 
 
     const [friendList, setFriendList] = useState([]);
@@ -56,6 +58,25 @@ function Layout() {
         })
         
     }, [])
+
+    function updateUserRecord(){
+        console.log(name)
+        console.log(goal)
+        if (name == "" || goal == ""){
+            alert("please fill in your name and goal properly")
+        }else{
+            const uid = (user) ? user.uid : "";
+            if (uid != ""){
+                firebase.database().ref('users/' + uid).set(
+                    {
+                        UserName : name,
+                        UserStatus : goal
+                    }
+                );
+            }
+        }
+
+    }
 
     return (
         <div className="LayOut">
@@ -90,6 +111,7 @@ function Layout() {
                                     <Card.Text>
                                         <input type="text" placeholder="What is your name ?" value={name}
                                             onChange={onChangeName} />
+                                        <Button onClick = {()=>updateUserRecord()}>Submit</Button> 
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -100,6 +122,7 @@ function Layout() {
                                     <Card.Text>
                                         <input type="text" placeholder="What are your goals today" value={goal}
                                             onChange={onChangeGoal} />
+                                            <Button onClick = {()=>updateUserRecord()}>Submit</Button> 
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
