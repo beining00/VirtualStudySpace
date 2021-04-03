@@ -8,7 +8,7 @@ export default function TimerDisplay({currentTime}) {
     }
 
     return (
-        <div>
+        <div style={{fontFamily:"fantasy"}}>
             {doubleDigits(currentTime.hours)}{" : "}{doubleDigits(currentTime.minutes)}{" : "}{doubleDigits(currentTime.seconds)}
         </div>
     );

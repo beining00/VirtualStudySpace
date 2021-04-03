@@ -12,6 +12,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { MDBInput, MDBCol } from "mdbreact";
 //import { MDBSmoothScroll } from "mdbreact";
 import FriendItem from './FriendItem';
+import Timer from './Timer'
 
 import firebase, {auth} from './Firebase';
 import {useAuthState} from 'react-firebase-hooks/auth';
@@ -37,14 +38,14 @@ function Layout() {
     const onChangeGoal = (event) => {
         setGoal(event.target.value);
     };
-    // user state  
+    // user state
     const [user] = useAuthState(auth);
 
 
     const [friendList, setFriendList] = useState([]);
     React.useEffect(() => {
         var dfRefObj = firebase.database().ref().child('users');
-        //sync object changes 
+        //sync object changes
         dfRefObj.on('value', snap =>{
             //console.log('snap')
             console.log(snap.val());
@@ -56,7 +57,7 @@ function Layout() {
             }
             setFriendList(_friendList);
         })
-        
+
     }, [])
 
     function updateUserRecord(){
@@ -81,8 +82,8 @@ function Layout() {
     return (
         <div className="LayOut">
             <Container >
-                <Row>  
-                    
+                <Row>
+
                     <Col style={{ marginRight: "50px" }}>
                         {/* <MDBSmoothScroll to="listOfFriends">Section 1</MDBSmoothScroll> */}
                         <div>
@@ -95,13 +96,13 @@ function Layout() {
 
                                 {friendList.map((friend, index) =>{
 
-                                    // TODO skip the record that is below to the current use 
+                                    // TODO skip the record that is below to the current use
                                     console.log(friend)
                                     return (
-                                      <FriendItem userName={friend.UserName} userStatus={friend.UserStatus} />
+                                        <FriendItem userName={friend.UserName} userStatus={friend.UserStatus} />
                                     )
                                 })}
-                                
+
                             </ListGroup>
                             </Card>
                         </div>
@@ -114,26 +115,25 @@ function Layout() {
                                     <Card.Text>
                                         <input type="text" placeholder="What is your name ?" value={name}
                                             onChange={onChangeName} />
-                                        <Button onClick = {()=>updateUserRecord()}>Submit</Button> 
+                                        <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
-                       
                             <Card style={cardStyle1}>
                                 <Card.Body>
                                     <Card.Title>Your Goal</Card.Title>
                                     <Card.Text>
                                         <input type="text" placeholder="What are your goals today" value={goal}
                                             onChange={onChangeGoal} />
-                                            <Button onClick = {()=>updateUserRecord()}>Submit</Button> 
+                                            <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button>
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
-                       </div>
-                   </Col>
-                   
+                        </div>
+                    </Col>
+                    <Timer goal={goal}/>
                 </Row>
             </Container>
-        </div>); 
+        </div>);
 }
-export default Layout; 
+export default Layout;
