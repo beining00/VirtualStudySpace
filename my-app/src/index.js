@@ -18,9 +18,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('AppRoot')
 );
-
-ReactDOM.render(
-  <React.StrictMode>
-    <Timer />
-  </React.StrictMode>,  document.getElementById('TimerRoot')
-);
