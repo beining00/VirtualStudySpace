@@ -3,8 +3,12 @@ import ReactDOM from 'react-dom';
 import '../css/App.css';
 import {useState, useEffect} from 'react'
 import TimerDisplay from './TimerDisplay'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Row';
+import Card from 'react-bootstrap/Card';
 
-function Timer() {
+function Timer(goal) {
   const [totalTime, updateTotalTimer] = useState({seconds: 0, minutes: 0, hours: 0})
   const [workingTime, updateWorkingTimer] = useState({seconds: 0, minutes: 0, hours: 0})
   const [breakTime, updateBreakTimer] = useState({seconds: 0, minutes: 0, hours: 0})
@@ -141,37 +145,71 @@ function Timer() {
     );
   }
 
+  const cardStyle2 = {
+    width: "30vw",
+    height: "8vh",
+
+    marginLeft: "50px",
+
+    border:"solid"
+  }
+
+  const timerCardColumn = {
+    width: "50%"
+  }
+
   return (
-  <div className="TimerDisplay">
-      <p>
-          TOTAL TIME
-      </p>
-      <TimerDisplay currentTime={totalTime}/>
+  <>
+    <Col Card style={cardStyle2}>
+      <Card.Body>
+        <Card.Title>Set time for your {goal.goal} </Card.Title>
+        <Card.Subtitle className="total-time">Total time</Card.Subtitle>
+        <div className="TimerDisplay">
+            <p>
+              TOTAL TIME
+              <TimerDisplay currentTime={totalTime}/>
+            </p>
 
-      <p>
-          WORKING TIME
-      </p>
-      <TimerDisplay currentTime={workingTime}/>
+            <Container>
+              <Row>
+                <Col style={{width:"50%"}}>
+                  <p>
+                    WORKING TIME
+                    <TimerDisplay currentTime={workingTime}/>
+                  </p>
+                </Col>
+                <Col style={{width:"50%"}}>
+                  <p>
+                    BREAK TIME
+                    <TimerDisplay currentTime={breakTime}/>
+                  </p>
+                </Col>
+              </Row>
 
-      <p>
-          BREAK TIME
-      </p>
-      <TimerDisplay currentTime={breakTime}/>
+              <Row style={{width:"50%"}}>
+                <Col>
+                  <p>
+                    BATHROOM BREAK TIME
+                    <TimerDisplay currentTime={bathroomBreakTime}/>
+                  </p>
+                </Col>
+                <Col>
+                  <p>
+                    SNACK BREAK TIME
+                    <TimerDisplay currentTime={snackBreakTime}/>
+                  </p>
+                </Col>
+              </Row>
+            </Container>
 
-      <p>
-          BATHROOM BREAK TIME
-      </p>
-      <TimerDisplay currentTime={bathroomBreakTime}/>
+            <div id="timerButtons">
+              <button onClick={() => startTimer()}> Start Timer</button>
+            </div>
+        </div>
+      </Card.Body>
+    </Col>
 
-      <p>
-          SNACK BREAK TIME
-      </p>
-      <TimerDisplay currentTime={snackBreakTime}/>
-
-      <div id="timerButtons">
-        <button onClick={() => startTimer()}> Start Timer</button>
-      </div>
-  </div>
+  </>
   );
 }
 
