@@ -3,8 +3,11 @@ import '../css/App.css';
 import SignIn from './SignIn';
 import TopBar from './TopBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import FriendListItem from './FriendListItem'
+
 
 function App() {
+  FriendListItem();
   return (
     <div className="App">
       

@@ -1,35 +1,14 @@
 import React from 'react';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
 import Button from 'react-bootstrap/Button';
+import firebase from './Firebase';
 
 
 
 
 
-if (!firebase.apps.length){
-    console.log(1)
-    console.log(process.env.REACT_APP_FIREBAE_API_KEY)
-    firebase.initializeApp({
-
-        apiKey: process.env.REACT_APP_FIREBAE_API_KEY,
-        authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-        projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-        storageBucket:process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-        messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGE_SENDER_ID,
-        appId: process.env.REACT_APP_FIREBASE_APP_ID,
-        measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
-    
-    })
-
-    
-
-}
 
 const auth = firebase.auth();
-const firestore = firebase.firestore();
-//const analytics = firebase.analytics();
+
 
 
 function SignOut(props){
