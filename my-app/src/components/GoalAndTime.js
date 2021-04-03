@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Row';
 
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 //import { GiAchievement } from "react-icons/fa"; 
 
 const cardStyle1 = {
@@ -33,6 +34,7 @@ function GoalAndTime() {
                         <Card.Text>
                         <input type="text" placeholder="What are your goals today" value={goal}
                                 onChange={onChange} />
+                        {/* <Button onClick = {()=>updateUserRecord}>Submit</Button> */}
                         </Card.Text>
                         </Card.Body>
          </Col>
@@ -46,4 +48,4 @@ function GoalAndTime() {
         </Container> 
     );
 }
-export default GoalAndName;
+export default GoalAndTime;
