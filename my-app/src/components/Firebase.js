@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import {useAuthState} from 'react-firebase-hooks/auth';
 
 if (!firebase.apps.length){
     console.log(1)
@@ -21,4 +22,8 @@ if (!firebase.apps.length){
 
 }
 
+const auth = firebase.auth();
+
+
+export {auth};
 export default firebase;
