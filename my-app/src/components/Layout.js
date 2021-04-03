@@ -51,7 +51,7 @@ function Layout() {
             const _friendList = [];
             const friends = snap.val();
             for (let id in friends){
-                _friendList.push(friends[id]);
+                _friendList.push({"uid":id, ...friends[id]});
 
             }
             setFriendList(_friendList);
@@ -93,9 +93,12 @@ function Layout() {
                             <Card.Header>Friends</Card.Header>
                             <ListGroup id = "ListOfFriends" variant="flush">
 
-                                {friendList.map((friend) =>{
+                                {friendList.map((friend, index) =>{
+
+                                    // TODO skip the record that is below to the current use 
+                                    console.log(friend)
                                     return (
-                                        <FriendItem userName={friend.UserName} userStatus={friend.UserStatus} /> 
+                                      <FriendItem userName={friend.UserName} userStatus={friend.UserStatus} />
                                     )
                                 })}
                                 

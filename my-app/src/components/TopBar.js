@@ -3,7 +3,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import SignIn , {SignOut} from './SignIn';
 import Firebase, {auth} from './Firebase';
-import {useCollectionData} from 'react-firebase-hooks/firestore';
 import {useAuthState} from 'react-firebase-hooks/auth';
 
 function TopBar(){
@@ -13,9 +12,9 @@ function TopBar(){
     const [userEmail, setUserEmail] = React.useState(ue)
     
     React.useEffect(()=>{
-        console.log(ue)
+        console.log("TopBar Render")
         console.log(user)
-        setUserEmail(ue)
+        setUserEmail(userEmail)
     
     }, []
     )
