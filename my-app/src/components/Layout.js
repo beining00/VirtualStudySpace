@@ -53,6 +53,14 @@ function Layout() {
                                 <ListGroup.Item>jerry</ListGroup.Item>
                             </ListGroup>
                             </Card>
+                            <Card style={{ width: '18rem' }}>
+                                <Card.Header>Global User</Card.Header>
+                                <ListGroup id="Global User" variant="flush">
+                                    <ListGroup.Item>david</ListGroup.Item>
+                                    <ListGroup.Item>serena</ListGroup.Item>
+                                    <ListGroup.Item>jerry</ListGroup.Item>
+                                </ListGroup>
+                            </Card>
                         </div>
                     </Col>
                     <Col>
@@ -66,7 +74,7 @@ function Layout() {
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
-                       
+                                
                             <Card style={cardStyle1}>
                                 <Card.Body>
                                     <Card.Title>Your Goal</Card.Title>
