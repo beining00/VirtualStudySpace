@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Container from 'react-bootstrap/Container';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Row';
+
 import Card from 'react-bootstrap/Card';
 //import { GiAchievement } from "react-icons/fa"; 
 
@@ -23,25 +25,25 @@ function GoalAndTime() {
     };
     return (
         <Container >
-            <Row>
-                <Col Card style={cardStyle1}
+        <Row>
+         <Col Card style={cardStyle1}>
+
                     <Card.Body>
                         <Card.Title>Your Goal</Card.Title>
                         <Card.Text>
-                            <input type="text" placeholder="What are your goals today" value={goal}
+                        <input type="text" placeholder="What are your goals today" value={goal}
                                 onChange={onChange} />
                         </Card.Text>
-                    </Card.Body>
-                </Col>
-                <Col Card style={cardStyle2}>
-                    <Card.Body>
-                       <Card.Title>Set time for your {goal} </Card.Title>
-                <Card.Subtitle className="total-time">Total time</Card.Subtitle>
-                    </Card.Body>
-                   
-                </Col>
-            </Row>
-        </Container>
+                        </Card.Body>
+         </Col>
+            <Col Card style={cardStyle2}>
+                        <Card.Body>
+                        <Card.Title>Set time for your {goal} </Card.Title>
+                        <Card.Subtitle className="total-time">Total time</Card.Subtitle>
+                        </Card.Body> 
+            </Col>
+        </Row>
+        </Container> 
     );
 }
-export default GoalAndTime;
+export default GoalAndName;
