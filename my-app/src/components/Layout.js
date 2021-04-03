@@ -14,7 +14,7 @@ import { MDBInput, MDBCol } from "mdbreact";
 import { GiAchievement } from "react-icons/gi";
 //import { MDBSmoothScroll } from "mdbreact";
 import FriendItem from './FriendItem';
-import PersonalLog from './PersonalLog';
+import MessageSection from './MessageSection';
 
 import firebase, {auth} from './Firebase';
 import {useAuthState} from 'react-firebase-hooks/auth';
@@ -181,7 +181,7 @@ function Layout() {
                             </Card>
 
                             <Card style={cardStyle3}>
-                                <PersonalLog />
+                                <MessageSection />
                             </Card>
 
 
