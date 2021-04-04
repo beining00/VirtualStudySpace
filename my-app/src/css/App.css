@@ -50,7 +50,7 @@
   padding: 5px;
   height: 100px;
   margin: 1vh 0 5vh;
-  overflow-y: scroll;
+  overflow-y: scroll !important;
   display: flex;
   flex-direction: column;
 }
@@ -74,17 +74,7 @@
 
 }
 
-.user_list::-webkit-scrollbar {
-  width: 0.3rem;
-}
 
-.user_list::-webkit-scrollbar-track {
-  background:#d8e7f2;
-}
-
-.user_list::-webkit-scrollbar-thumb {
-  background:#5683a3;
-}
 
 /* text input form   */
 form {
@@ -230,6 +220,13 @@ img {
 
   right : 55px;
   top : 5px;
+
+}
+
+.message_section{
+  width: 100%;
+  height : 35vh !important;
+
 
 }
 

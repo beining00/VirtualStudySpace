@@ -298,7 +298,7 @@ function Layout() {
 
                         <Row >
                             <Col md = '6'>
-                                <Card style={cardStyle1}>
+                                <Card style={cardStyle1} >
                                     <Card.Body>
                                         <Card.Title>👋 Hello {name}</Card.Title>
                                         <Card.Text>
@@ -339,16 +339,9 @@ function Layout() {
                             
                         </Row>
                         <Row > 
-                                <Card >
-
-                                    <Card.Body style={cardStyle3} >
-
+                                <Card className="message_section h-50'">
                                         <MessageSection userName={name}/>
-                                    </Card.Body>
                                 </Card>
-                            
-                            
-                            
                         </Row>
                         <br/>
                     </Col>
