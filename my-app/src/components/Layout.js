@@ -293,20 +293,9 @@ function Layout() {
 
                     {/* --------right col of timer + middle section ---------- */}
                    
-                        
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
                     <Col md = '8' >
-=======
-                    <Col md = '8'>
->>>>>>> parent of 511d42b2 (new authentication)
-=======
-                    <Col md = '8'>
->>>>>>> parent of 511d42b2 (new authentication)
-=======
-                    <Col md = '8'>
->>>>>>> parent of 511d42b2 (new authentication)
+
                         <Row >
                             <Col md = '6'>
                                 <Card style={cardStyle1}>
