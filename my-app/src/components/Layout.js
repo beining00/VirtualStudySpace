@@ -96,10 +96,8 @@ function Layout() {
             console.log('user record changes ')
             //console.log(snap.val());
             console.log("fetch friend list ");
-            console.log(snap.val())
+            
             const userFriends = snap.val().userFriends[uid];
-            
-            
             console.log(userFriends)
             
             
@@ -296,7 +294,11 @@ function Layout() {
                     {/* --------right col of timer + middle section ---------- */}
                    
                         
+<<<<<<< HEAD
                     <Col md = '8' >
+=======
+                    <Col md = '8'>
+>>>>>>> parent of 511d42b2 (new authentication)
                         <Row >
                             <Col md = '6'>
                                 <Card style={cardStyle1}>

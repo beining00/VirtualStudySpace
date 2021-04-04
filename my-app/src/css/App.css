@@ -69,7 +69,7 @@ main::-webkit-scrollbar-thumb {
 
 /* user list scrolling */
 .user_list {
-  height : 75vh;
+  height : 71vh;
   overflow-y: scroll;
 
 }
@@ -216,18 +216,25 @@ img {
 .friend_state_btn{
   position : absolute;
   right : 5px;
+<<<<<<< HEAD
   top : 5px;
   /* background-color: #d8e7f2;*/
 
  
   
+=======
+>>>>>>> parent of 511d42b2 (new authentication)
 }
 
 .like_btn{
   position : absolute;
+<<<<<<< HEAD
   right : 55px;
   top : 5px;
 
   /* background-color: #d8e7f2; */
+=======
+  right : 40px;
+>>>>>>> parent of 511d42b2 (new authentication)
 }
 
