@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import GoalAndTime from "./GoalAndTime";
 import Form from 'react-bootstrap/Form';
@@ -26,9 +26,18 @@ import rtdb_presence from './rtdb_presence';
 import _ from "lodash";
 
 const cardStyle1 = {
-    width: "20rem",
-    height: "8rem",
-    marginTop: "20px"
+
+    marginTop: "10px",
+    height : '40%',
+    width : "100%"
+
+};
+const cardStyle11 = {
+
+    marginTop: "10px",
+    height : '55%',
+    width : "100%"
+
 };
 const cardStyle2 = {
     width: "20rem",
@@ -37,7 +46,7 @@ const cardStyle2 = {
 };
 
 const cardStyle3 = {
-    width: "40rem",
+    width: '100%', 
     height: "15rem",
     marginTop: "20px"
 
@@ -158,15 +167,17 @@ function Layout() {
     return (
         <div className="LayOut">
             <Container >
-                <Row xs="2">
-                    <Col>
+                    <Row>
+                    {/* --------left col of friend list ---------- */}
+                    <Col md = '4'>
                         {/* <MDBSmoothScroll to="listOfFriends">Section 1</MDBSmoothScroll> */}
                         <div>
-                        <MDBCol lg="12">
+                        {/* <MDBCol lg="10"> */}
                             <MDBInput hint="Search" type="text" containerClass="active-pink active-pink-2 mt-0 mb-3" />
-                        </MDBCol>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Header>Friends</Card.Header>
+                        {/* </MDBCol> */}
+                        {/* <Card style={{ width: '18rem' }}> */}
+                        <Card>
+                            <Card.Header>👥 Friends</Card.Header>
                             <ListGroup id = "ListOfFriends" variant="flush">
 
                                 {_.sortBy(friendList, [function(o) { return o.state == 'online'?0:1; }]).map((friend, index) =>{
@@ -183,40 +194,54 @@ function Layout() {
                             </Card>
                         </div>
                     </Col>
-                    <Col>
-                        <Row xs="2">
-                            <Col>
+
+                    {/* --------right col of timer + middle section ---------- */}
+                   
+                        
+                    <Col md = '8'>
+                        <Row >
+                            <Col md = '6'>
                                 <Card style={cardStyle1}>
                                     <Card.Body>
-                                        <Card.Title>Hello {name}</Card.Title>
+                                        <Card.Title>👋 Hello {name}</Card.Title>
                                         <Card.Text>
-                                            <input type="text" placeholder="What is your name ?" value={name}
+                                            {/* <input type="text" placeholder="What is your name ?" value={name}
                                                 onChange={onChangeName} />
-                                            <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button>
+                                            <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button> */}
+                                            <EditableTextInput defaultValue={"default"} value={name} 
+                                                             onSave={()=>updateUserRecord()}  setValue ={setName}/>
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
-                                <Card style={cardStyle1}>
+                                <Card style={cardStyle11}>
                                     <Card.Body>
-                                        <Card.Title>Your Goal<GiAchievement/></Card.Title>
 
-                                        <Card.Text>
-                                            <input type="text" placeholder="What are your goals today" value={goal}
+                                        <Card.Title> 🔥 Your Goal<GiAchievement/></Card.Title>
+
+                                        <Card.Text className = 'goal_field'>
+                                        <EditableTextInput defaultValue={"default"} value={ goal} 
+                                                             onSave={()=>updateUserRecord()}  setValue ={setGoal}/>
+                                            {/* <input type="text" placeholder="What are your goals today" value={goal}
                                                 onChange={onChangeGoal} />
-                                                <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button>
+                                                <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button> */}
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
                             </Col>
+
+                            <Col md = '6'>
                             <Timer goal={goal}/>
+                            </Col>
+                            
                         </Row>
-                        <Row>
+                        <Row> 
                             <Card style={cardStyle3}>
                                 <MessageSection />
                             </Card>
                         </Row>
                     </Col>
-                </Row>
+                    </Row>
+
             </Container>
         </div>);
 }

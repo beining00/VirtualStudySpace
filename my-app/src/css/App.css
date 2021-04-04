@@ -169,3 +169,20 @@ img {
   border-radius: 50%;
   margin: 2px 5px;
 }
+
+
+.text_input {
+  border-radius: 10%;
+  border-width: 1px;
+  border-color: #c2c8d4;
+  border-style: solid;
+  width : '80%';
+  height : '100%';
+}
+
+.goal_field{
+  height:'100px'; 
+  line-height:'4';
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 150%;
+}

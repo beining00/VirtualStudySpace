@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react'
 import TimerDisplay from './TimerDisplay'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
@@ -147,11 +147,10 @@ function Timer(goal) {
   }
 
   const cardStyle2 = {
-    width: "23vw",
+    width:  "100%",
     height: "37.5vh",
 
-    marginTop: "20px",
-    marginLeft: "50px",
+    
   }
 
   const timerLeftColumn = {
@@ -169,8 +168,7 @@ function Timer(goal) {
 
   return (
   <>
-    <Col>
-      <div>
+  
         <Card style={cardStyle2}>
           <Card.Body>
             <Card.Title>Set time for your {goal.goal} </Card.Title>
@@ -218,8 +216,7 @@ function Timer(goal) {
             </div>
           </Card.Body>
         </Card>
-      </div>
-    </Col>
+    
 
   </>
   );
