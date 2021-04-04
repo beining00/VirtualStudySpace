@@ -13,8 +13,6 @@ function Timer(goal) {
   const [totalTime, updateTotalTimer] = useState({seconds: 0, minutes: 0, hours: 0})
   const [workingTime, updateWorkingTimer] = useState({seconds: 0, minutes: 0, hours: 0})
   const [breakTime, updateBreakTimer] = useState({seconds: 0, minutes: 0, hours: 0})
-  const [bathroomBreakTime, updateBathroomBreakTimer] = useState({seconds: 0, minutes: 0, hours: 0})
-  const [snackBreakTime, updateSnackBreakTimer] = useState({seconds: 0, minutes: 0, hours: 0})
   const [timerRunning, setRunning] = useState('stopped')
 
 
@@ -37,20 +35,6 @@ function Timer(goal) {
       updateTime(breakTime, updateBreakTimer)
     }
   }, [timerRunning, breakTime]
-  )
-
-  useEffect( () => {
-    if (timerRunning === 'bathroomBreak') {
-      updateTime(bathroomBreakTime, updateBathroomBreakTimer)
-    }
-  }, [timerRunning, bathroomBreakTime]
-  )
-
-  useEffect( () => {
-    if (timerRunning === 'snackBreak') {
-      updateTime(snackBreakTime, updateSnackBreakTimer)
-    }
-  }, [timerRunning, snackBreakTime]
   )
 
   function updateTime(time, methodName) {
@@ -85,8 +69,6 @@ function Timer(goal) {
     ReactDOM.render(
       <>
         <Button style={{margin:"5px"}} onClick={() => breakTimer()}> Take Break </Button>
-        <Button style={{margin:"5px"}} onClick={() => bathroomBreakTimer()}> Take Bathroom Break </Button>
-        <Button style={{margin:"5px"}} onClick={() => snackBreakTimer()}> Take Snack Break </Button>
         <Button style={{margin:"5px"}} onClick={() => stopTimer()}> Stop Timer</Button>
       </>,
       document.getElementById('timerButtons')
@@ -99,36 +81,6 @@ function Timer(goal) {
     ReactDOM.render(
       <>
         <Button style={{margin:"5px"}} onClick={() => startTimer()}> Start Working </Button>
-        <Button style={{margin:"5px"}} onClick={() => bathroomBreakTimer()}> Take Bathroom Break </Button>
-        <Button style={{margin:"5px"}} onClick={() => snackBreakTimer()}> Take Snack Break </Button>
-        <Button style={{margin:"5px"}} onClick={() => stopTimer()}> Stop Timer</Button>
-      </>,
-      document.getElementById('timerButtons')
-    );
-  }
-
-  function bathroomBreakTimer() {
-    setRunning('bathroomBreak')
-
-    ReactDOM.render(
-      <>
-        <Button style={{margin:"5px"}} onClick={() => startTimer()}> Start Working </Button>
-        <Button style={{margin:"5px"}} onClick={() => breakTimer()}> Take Break </Button>
-        <Button style={{margin:"5px"}} onClick={() => snackBreakTimer()}> Take Snack Break </Button>
-        <Button style={{margin:"5px"}} onClick={() => stopTimer()}> Stop Timer</Button>
-      </>,
-      document.getElementById('timerButtons')
-    );
-  }
-
-  function snackBreakTimer() {
-    setRunning('snackBreak')
-
-    ReactDOM.render(
-      <>
-        <Button style={{margin:"5px"}} onClick={() => startTimer()}> Start Working </Button>
-        <Button style={{margin:"5px"}} onClick={() => breakTimer()}> Take Break </Button>
-        <Button style={{margin:"5px"}} onClick={() => bathroomBreakTimer()}> Take Bathroom Break </Button>
         <Button style={{margin:"5px"}} onClick={() => stopTimer()}> Stop Timer</Button>
       </>,
       document.getElementById('timerButtons')
@@ -148,7 +100,7 @@ function Timer(goal) {
 
   const cardStyle2 = {
     width: "23vw",
-    height: "37.5vh",
+    height: "28vh",
 
     marginTop: "20px",
     marginLeft: "50px",
@@ -175,46 +127,29 @@ function Timer(goal) {
           <Card.Body>
             <Card.Title>Set time for your {goal.goal} </Card.Title>
             <div className="TimerDisplay">
-                <p>
-                  <span style={{fontSize:"22px"}}> TOTAL TIME </span>
-                  <TimerDisplay currentTime={totalTime}/>
-                </p>
-
-                <Container>
-                  <Row style={{width:"100%"}}>
-                    <Col style={{width:"40%", paddingLeft:"15%"}}>
-                      <p>
-                        <span style={{fontSize:"18px"}}> WORKING </span>
-                        <TimerDisplay currentTime={workingTime}/>
-                      </p>
-                    </Col>
-                    <Col style={timerRightColumn}>
-                      <p>
-                        <span style={{fontSize:"18px"}}> BREAK </span>
-                        <TimerDisplay currentTime={breakTime}/>
-                      </p>
-                    </Col>
-                  </Row>
-
-                  <Row>
-                    <Col style={{width:"40%", paddingLeft:"12.8%"}}>
-                      <p>
-                        <span style={{fontSize:"18px"}}> BATHROOM </span>
-                        <TimerDisplay currentTime={bathroomBreakTime}/>
-                      </p>
-                    </Col>
-                    <Col style={timerRightColumn}>
-                      <p>
-                        <span style={{fontSize:"18px"}}> SNACK </span>
-                        <TimerDisplay currentTime={snackBreakTime}/>
-                      </p>
-                    </Col>
-                  </Row>
-                </Container>
-
-                <div id="timerButtons">
-                  <Button style={{margin:"5px"}} onClick={() => startTimer()}> Start Timer</Button>
-                </div>
+              <p>
+                <span style={{fontSize:"22px"}}> TOTAL TIME </span>
+                <TimerDisplay currentTime={totalTime}/>
+              </p>
+              <Container>
+                <Row style={{width:"100%"}}>
+                  <Col style={{width:"40%", paddingLeft:"15%"}}>
+                    <p>
+                      <span style={{fontSize:"18px"}}> WORKING </span>
+                      <TimerDisplay currentTime={workingTime}/>
+                    </p>
+                  </Col>
+                  <Col style={timerRightColumn}>
+                    <p>
+                      <span style={{fontSize:"18px"}}> BREAK </span>
+                      <TimerDisplay currentTime={breakTime}/>
+                    </p>
+                  </Col>
+                </Row>
+              </Container>
+              <div id="timerButtons">
+                <Button style={{margin:"5px"}} onClick={() => startTimer()}> Start Timer</Button>
+              </div>
             </div>
           </Card.Body>
         </Card>
