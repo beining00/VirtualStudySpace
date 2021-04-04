@@ -48,7 +48,7 @@ const cardStyle2 = {
 
 const cardStyle3 = {
    
-    height: "80%",
+    height: "60%",
     //marginTop: "10px",
     width:'95%',
     marginLeft: "15px"
@@ -99,11 +99,8 @@ function Layout() {
             
             const userFriends = snap.val().userFriends[uid];
             console.log(userFriends)
-
-            for (let f in userFriends){
-                console.log(f)
-
-            }
+            
+            
 
             // fetch global user 
             const _globalUserList = [];
@@ -124,34 +121,40 @@ function Layout() {
             for (let id in globalUserPre){
                 _globalUserList[uid2index[id]] = {..._globalUserList[uid2index[id]], "state": globalUserPre[id].state};
             }
-
+           
             
-
-            const _removeIndex = []
-            // now pop the friend list
-            for (let id in globalUsers){
-                // console.log("friend ids")
-                // console.log(id)
-                // console.log(userFriends[id])
-                if (typeof userFriends[id] !== "undefined"){
-                    //console.log("add")
-                    // add to _friendList 
-                    _friendList.push(_globalUserList[uid2index[id]])
-                    // remove from global list 
-                    _removeIndex.push(uid2index[id])
-                    
+            if (typeof userFriends != "undefined"){
+                const _removeIndex = []
+                // now pop the friend list
+                for (let id in globalUsers){
+                    console.log("friend ids")
+                    console.log(id)
+                    console.log(typeof userFriends[id])
+                    if (typeof userFriends[id] != "undefined"){
+                        console.log("add")
+                        // add to _friendList 
+                        _friendList.push(_globalUserList[uid2index[id]])
+                        // remove from global list 
+                        _removeIndex.push(uid2index[id])
+                        
+                    }
                 }
-            }
 
+                //_.sortBy(_globalUserList, [function(o) { return o.state == 'online'?1:0; }]);
+                console.log("final globalUser list")
+                console.log(_globalUserList);
+                _.pullAt(_globalUserList, _removeIndex)
+                setFriendList(_friendList)
+                
+            }else{
+                // no friend yet 
+                setFriendList([])
+
+            }
             
-            
-            //_.sortBy(_globalUserList, [function(o) { return o.state == 'online'?1:0; }]);
-            console.log("final globalUser list")
-            console.log(_globalUserList);
-            _.pullAt(_globalUserList, _removeIndex)
             setglobalUserList(_globalUserList);
 
-            setFriendList(_friendList)
+            
             console.log(friendList)
 
 
@@ -243,8 +246,8 @@ function Layout() {
                             {/* <MDBInput hint="Search" type="text" containerClass="active-pink active-pink-2 mt-0 mb-3" /> */}
                         {/* </MDBCol> */}
                         {/* <Card style={{ width: '18rem' }}> */}
-                        <Card>
-                            <Card.Header>
+                        <Card className ="user_list">
+                            <Card.Header className="friend_list_header">
                             👥 Friends 
                             
                             </Card.Header>
@@ -261,7 +264,7 @@ function Layout() {
                                 })}
 
                             </ListGroup>
-                            <Card.Header>
+                            <Card.Header className="friend_list_header">
                             👥 World User 
                             <MDBInput hint="Search" type="text" containerClass="active-pink active-pink-2 mt-0 mb-3" onChange={(e)=>setSearchContent(e.target.value)}  />
                             </Card.Header>
@@ -281,6 +284,7 @@ function Layout() {
                                       userName={globalUser.UserName} userStatus={globalUser.UserStatus} userState={globalUser.state} isFriend ={false}/>
                                     )
                                 })}
+
 
                             </ListGroup>
                             </Card>
@@ -336,7 +340,7 @@ function Layout() {
                         <Row> 
                             
                                 <Card style={cardStyle3}>
-                                    <MessageSection />
+                                    <MessageSection userName={name}/>
                                 </Card>
                             
                             

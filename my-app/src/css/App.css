@@ -69,13 +69,33 @@ main::-webkit-scrollbar {
 }
 
 main::-webkit-scrollbar-track {
-  background: #1e1e24;
+  background:#d8e7f2;
 }
 
 main::-webkit-scrollbar-thumb {
-  background: #6649b8;
+  background: #5683a3;
 }
 
+/* user list scrolling */
+.user_list {
+  height : 71vh;
+  overflow-y: scroll;
+
+}
+
+.user_list::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+.user_list::-webkit-scrollbar-track {
+  background:#d8e7f2;
+}
+
+.user_list::-webkit-scrollbar-thumb {
+  background:#5683a3;
+}
+
+/* text input form   */
 form {
   height: 4vh;
   position: absolute;
@@ -109,7 +129,7 @@ button.chat_button{
   background-color: #282c34; /* Green */
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 1px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -196,5 +216,19 @@ img {
   line-height:'6';
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 140%;
+}
+
+.friend_list_header{
+  font-weight: bold;
+}
+
+.friend_state_btn{
+  position : absolute;
+  right : 5px;
+}
+
+.like_btn{
+  position : absolute;
+  right : 40px;
 }
 

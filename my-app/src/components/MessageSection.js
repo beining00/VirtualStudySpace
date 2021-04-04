@@ -4,7 +4,8 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import PersonalLog from './PersonalLog'
 
-function MessageSection(){
+function MessageSection(props){
+    const userName = props.userName;
 
     return (
         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
@@ -15,7 +16,7 @@ function MessageSection(){
             {/* <Sonnet /> */}
         </Tab>
         <Tab eventKey="profile" title="Global Chat">
-        <ChatRoom canChat={true} />
+        <ChatRoom senderName = {userName} canChat={true} />
             {/* <Sonnet /> */}
         </Tab>
         </Tabs>

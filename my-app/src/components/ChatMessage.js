@@ -10,6 +10,7 @@ function ChatMessage(props) {
     console.log(props)
     const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
     
+    
     return (<>
     
      

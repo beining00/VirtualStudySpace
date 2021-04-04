@@ -16,8 +16,7 @@ function TopBar(){
         console.log(user)
         setUserEmail(userEmail)
     
-    }, []
-    )
+    })
     console.log(user)
 
     return (
@@ -26,6 +25,8 @@ function TopBar(){
             <Navbar.Brand href="#home">Navbar</Navbar.Brand>
             
             {user ? <SignOut setEmail = {setUserEmail} /> : <SignIn  setEmail = {setUserEmail} />}
+            
+            {"   "}
             <Navbar.Brand href="#home">{userEmail}</Navbar.Brand>
             
 

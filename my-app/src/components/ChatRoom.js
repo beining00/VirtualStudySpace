@@ -69,6 +69,7 @@ function ChatRoom(props){
         e.preventDefault();
 
         const { uid } = auth.currentUser;
+        
         // get the current user name 
         // if (uid != ""){
         //     firebase.database().ref().child("globalUserStatus/users").child(uid).get().then(function(snapshot) {
@@ -95,7 +96,7 @@ function ChatRoom(props){
             text: formValue,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             uid,
-            userName : "dummy user"
+            userName : props.senderName
             })
 
         setFormValue('');
@@ -127,7 +128,7 @@ function ChatRoom(props){
 
                         <input className = "chat_input" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
     
-                        <button className = "chat_button" type="submit" disabled={!formValue}>🕊️</button>
+                        <button className = "chat_button" type="submit" disabled={!formValue}>send</button>
     
                         </form>
                     )

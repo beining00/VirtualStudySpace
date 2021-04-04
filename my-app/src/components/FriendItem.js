@@ -47,15 +47,16 @@ function FriendItem(props){
 
         <ListGroup.Item>
             {(userState && userState =="online" )? <MdPerson style={{ color: 'green'}} /> : <MdPerson style={{ color: 'primary'}} />}
-        
+            
             {userName }
 
            
             {(userState && userState =="online") &&
                 (<>
-                <MDBBadge color="success">{userStatus}</MDBBadge>
-
-                <button class="btn" onClick = {()=> sendLike()}><i className="fa fa-folder"></i>
+          
+                
+                
+                <button class="btn like_btn" onClick = {()=> sendLike()}><i className="fa fa-folder"></i>
                  <MdThumbUp style ={{textAlign: "right", color:"CornflowerBlue", fontSize: '25px'}}/>
                    
                 </button>
@@ -66,14 +67,18 @@ function FriendItem(props){
             }
             {/* remove friend icon */}
             {isFriend ?
-                <button class="btn" onClick = {()=>removeFriend()}><i className="fa fa-folder"></i>
+                <button class="btn friend_state_btn" onClick = {()=>removeFriend()}><i className="fa fa-folder"></i>
                 <MdRemoveCircleOutline style ={{textAlign: "right", color:"CornflowerBlue", fontSize: '25px'}}/>
                 </button>
-                :<button class="btn" onClick = {()=>addFriend()}><i className="fa fa-folder"></i>
+                :<button class="btn friend_state_btn" onClick = {()=>addFriend()}><i className="fa fa-folder"></i>
                 <MdAddCircleOutline style ={{textAlign: "right", color:"CornflowerBlue", fontSize: '25px'}}/>
                 </button>
 
             }
+
+            <br/>
+            { (userState && userState =="online") &&
+                <MDBBadge color="success">{userStatus}</MDBBadge>}
 
             
    

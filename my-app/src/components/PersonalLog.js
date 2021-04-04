@@ -43,6 +43,12 @@ function PersonalLog(){
 
     const [messageList, setMessageList] = React.useState([])
     const dummy = React.useRef();
+    console.log("this is a dummy")
+    console.log(dummy)
+    // React.useEffect(()=>{
+    //     console.log('scrolling')
+    //     dummy.current.scrollIntoView({ behavior: 'smooth' });
+    // },[])
 
     
 
