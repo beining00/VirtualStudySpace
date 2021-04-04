@@ -72,8 +72,18 @@ function Layout() {
 
 
 
+    //-------------------- fetch friend list --------------------------------
+    // const [friendIDList, setFriendIDList] = useState([]);
+    // React.useEffect(()=>{
+    //     // toggle user state, online/ offline
+    //     rtdb_presence();
 
+    // }, [])
+    //----------------------------------------------------------
     const [friendList, setFriendList] = useState([]);
+    const [globalUserList, setglobalUserList] = useState([]);
+    //read my Name and my Goal
+    const uid = (user) ? user.uid : "";
     React.useEffect(() => {
 
         // toggle user state, online/ offline
@@ -86,35 +96,69 @@ function Layout() {
             console.log('user record changes ')
             //console.log(snap.val());
             console.log("fetch friend list ");
-            console.log(snap.val().userFriends)
-            const _friendList = [];
             
-            const friends = snap.val().users;
-            const friendPre = snap.val().presence;
+            const userFriends = snap.val().userFriends[uid];
+            console.log(userFriends)
+
+            for (let f in userFriends){
+                console.log(f)
+
+            }
+
+            // fetch global user 
+            const _globalUserList = [];
+            const _friendList = []
+            
+            const globalUsers = snap.val().users;
+            const globalUserPre = snap.val().presence;
             const uid2index  = {};
             var index = 0;
-            for (let id in friends){
-                _friendList.push({"uid":id, ...friends[id]});
+            for (let id in globalUsers){
+                _globalUserList.push({"uid":id, ...globalUsers[id]});
                 uid2index[id] = index
                 index ++;
+                
 
             }
 
-            for (let id in friendPre){
-                _friendList[uid2index[id]] = {..._friendList[uid2index[id]], "state": friendPre[id].state};
+            for (let id in globalUserPre){
+                _globalUserList[uid2index[id]] = {..._globalUserList[uid2index[id]], "state": globalUserPre[id].state};
             }
 
-            //_.sortBy(_friendList, [function(o) { return o.state == 'online'?1:0; }]);
-            console.log("final friend list")
-            console.log(_friendList);
-            setFriendList(_friendList);
+            
+
+            const _removeIndex = []
+            // now pop the friend list
+            for (let id in globalUsers){
+                // console.log("friend ids")
+                // console.log(id)
+                // console.log(userFriends[id])
+                if (typeof userFriends[id] !== "undefined"){
+                    //console.log("add")
+                    // add to _friendList 
+                    _friendList.push(_globalUserList[uid2index[id]])
+                    // remove from global list 
+                    _removeIndex.push(uid2index[id])
+                    
+                }
+            }
+
+            
+            
+            //_.sortBy(_globalUserList, [function(o) { return o.state == 'online'?1:0; }]);
+            console.log("final globalUser list")
+            console.log(_globalUserList);
+            _.pullAt(_globalUserList, _removeIndex)
+            setglobalUserList(_globalUserList);
+
+            setFriendList(_friendList)
+            console.log(friendList)
 
 
 
         })
 
-        //read my Name and my Goal
-        const uid = (user) ? user.uid : "";
+        
         if (uid != ""){
             firebase.database().ref().child("globalUserStatus/users").child(uid).get().then(function(snapshot) {
                 if (snapshot.exists()) {
@@ -138,21 +182,32 @@ function Layout() {
         // presenceRefObj.on('value', snap =>{
         //     console.log('user presence changes ')
         //     console.log(snap.val());
-        //     const _friendList = [];
+        //     const _globalUserList = [];
         //     const friends = snap.val();
         //     for (let id in friends){
-        //         _friendList.push({"uid":id, ...friends[id]});
+        //         _globalUserList.push({"uid":id, ...friends[id]});
 
         //     }
-        //     setFriendList(_friendList);
+        //     setFriendList(_globalUserList);
         // })
 
     }, [])
 
-    function searching(e){
-        console.log(e.target.value)
+    const [searchContent, setSearchContent] = useState("")
+    function filterUserList(){
+        if (searchContent == ""){
+            return globalUserList;
 
+        }
+        const _newUserList = [];
+        for (let i in globalUserList){
+            if (globalUserList[i].UserName.toLowerCase().startsWith(searchContent.toLowerCase())){
+                _newUserList.push(globalUserList[i])
+            }
+        }
+        return _newUserList;
     }
+    
 
     function updateUserRecord(e){
         console.log("inputChanged")
@@ -201,26 +256,29 @@ function Layout() {
                                     console.log(friend)
                                     return (
                                       <FriendItem myName={name} myID={user.uid} userUID= {friend.uid}
-                                      userName={friend.UserName} userStatus={friend.UserStatus} userState={friend.state}/>
+                                      userName={friend.UserName} userStatus={friend.UserStatus} userState={friend.state} isFriend ={true}/>
                                     )
                                 })}
 
                             </ListGroup>
                             <Card.Header>
                             👥 World User 
-                            <MDBInput hint="Search" type="text" containerClass="active-pink active-pink-2 mt-0 mb-3" onChange={(e)=>searching(e)}  />
+                            <MDBInput hint="Search" type="text" containerClass="active-pink active-pink-2 mt-0 mb-3" onChange={(e)=>setSearchContent(e.target.value)}  />
                             </Card.Header>
                             
                             <ListGroup id = "ListOfFriends" variant="flush">
                             
 
-                                {_.sortBy(friendList, [function(o) { return o.state == 'online'?0:1; }]).map((friend, index) =>{
+                                {
+                                 (_.sortBy(filterUserList(globalUserList)
+                                     , [function(o) { return o.state == 'online'?0:1; }]))
+                                .map((globalUser, index) =>{
 
                                     // TODO skip the record that is below to the current use
-                                    console.log(friend)
+                                    console.log(globalUser)
                                     return (
-                                      <FriendItem myName={name} myID={user.uid} userUID= {friend.uid}
-                                      userName={friend.UserName} userStatus={friend.UserStatus} userState={friend.state}/>
+                                      <FriendItem myName={name} myID={user.uid} userUID= {globalUser.uid}
+                                      userName={globalUser.UserName} userStatus={globalUser.UserStatus} userState={globalUser.state} isFriend ={false}/>
                                     )
                                 })}
 

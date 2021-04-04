@@ -11,4 +11,25 @@ function LogEvent(receiverUid,messageType, messageContent ){
 
 }
 
+
+function changeFriendList(isAdd, receiverUid,myId){
+    if (isAdd){
+        firebase.database().ref('globalUserStatus/userFriends/' + myId + "/" + receiverUid).push(
+            {
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                action: "add friend"
+            })
+            
+
+    }else{
+
+        firebase.database().ref('globalUserStatus/userFriends/' + myId + "/" +receiverUid ).set(null)
+
+    }
+    
+
+}
+
+export {changeFriendList};
+
 export default LogEvent; 
