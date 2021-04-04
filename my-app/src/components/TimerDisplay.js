@@ -1,5 +1,5 @@
-export default function TimerDisplay({currentTime}) {
-
+export default function TimerDisplay(props) {
+    const {currentTime, timeSize} = props;
     function doubleDigits(time) {
         if (time < 10) {
             return ("0" + time)
@@ -8,7 +8,7 @@ export default function TimerDisplay({currentTime}) {
     }
 
     return (
-        <div style={{fontFamily:"fantasy"}}>
+        <div style={{fontFamily:"fantasy",fontSize:timeSize}}>
             {doubleDigits(currentTime.hours)}{" : "}{doubleDigits(currentTime.minutes)}{" : "}{doubleDigits(currentTime.seconds)}
         </div>
     );

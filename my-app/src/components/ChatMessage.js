@@ -1,6 +1,7 @@
 import React from 'react';
 import Badge from 'react-bootstrap/Badge'
 import Row from 'react-bootstrap/Row';
+import {MdShare} from "react-icons/md";
 
 
 import firebase, {auth} from './Firebase';

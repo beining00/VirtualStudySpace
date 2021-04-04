@@ -2,7 +2,6 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import ChatMessage from './ChatMessage';
 import firebase, {auth} from './Firebase';
-
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
@@ -80,17 +79,19 @@ function PersonalLog(){
                             id : messID,
                             uid : messageContent.senderID,
                             userName : "bot",
-                            text:" Your friend " + messageContent.senderName + " sent you a like :D"})
+                            text:emoList[getRandomInt(emoList.length)] + " Your friend " + messageContent.senderName + " sent you a like :D"})
 
                     }
                     
                     
 
-                }else if(messageType == 'timeLog'){
+                }else if(messageType == 'workLog'){
                     _messageList.push({
+                        id : messID,
                         uid : '0',
-                        userName : "",
-                        text: emoList[getRandomInt(emoList.length)]+  " Congraduation! you have spent " + messageContent.time + " on "  + messageContent.goal})
+                        userName : "bot",
+                        text: emoList[getRandomInt(emoList.length)]+  " Congraduation! you have spent " + messageContent.time + " hours on "  + messageContent.goal.toUpperCase() + " with "
+                        + messageContent.workingPerc + " % focus" })
                 }
             }
 

@@ -48,7 +48,7 @@ const cardStyle2 = {
 
 const cardStyle3 = {
    
-    height: "50%",
+    height: "60%",
     //marginTop: "10px",
     width:'95%',
     marginLeft: "15px"
@@ -96,8 +96,10 @@ function Layout() {
             console.log('user record changes ')
             //console.log(snap.val());
             console.log("fetch friend list ");
-            
+            console.log(snap.val())
             const userFriends = snap.val().userFriends[uid];
+            
+            
             console.log(userFriends)
             
             
@@ -293,12 +295,11 @@ function Layout() {
 
                     {/* --------right col of timer + middle section ---------- */}
                    
-
-                    <Col md = '8' style={{height:'75hv'}} >
-
+                        
+                    <Col md = '8' style = {{height : '75vh'}}>
                         <Row >
                             <Col md = '6'>
-                                <Card style={cardStyle1} >
+                                <Card style={cardStyle1}>
                                     <Card.Body>
                                         <Card.Title>👋 Hello {name}</Card.Title>
                                         <Card.Text>
@@ -338,10 +339,14 @@ function Layout() {
                             </Col>
                             
                         </Row>
-                        <Row > 
-                                <Card className="message_section h-50'">
-                                        <MessageSection userName={name}/>
+                        <Row> 
+                            
+                                <Card style={cardStyle3}>
+                                    <MessageSection userName={name}/>
                                 </Card>
+                            
+                            
+                            
                         </Row>
                         <br/>
                     </Col>

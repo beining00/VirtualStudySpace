@@ -1,6 +1,5 @@
 {
   "projects": {
-    "default": "teammeetinggenerator",
-    "staging": "myvirtualstudyspace"
+    "default": "teammeetinggenerator"
   }
 }
