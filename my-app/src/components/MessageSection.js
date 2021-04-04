@@ -8,6 +8,7 @@ function MessageSection(){
 
     return (
         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+
         <Tab eventKey="home" title="Personal Log ">
             <PersonalLog />
 

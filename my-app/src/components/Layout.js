@@ -18,7 +18,7 @@ import PersonalLog from './PersonalLog';
 import Timer from './Timer'
 import MessageSection from './MessageSection';
 import EditableTextInput from './EditableTextInput';
-
+import TodoList from './TodoList'
 import firebase, {auth} from './Firebase';
 import {useAuthState} from 'react-firebase-hooks/auth';
 
@@ -46,9 +46,12 @@ const cardStyle2 = {
 };
 
 const cardStyle3 = {
-    width: '100%', 
+   
     height: "15rem",
-    marginTop: "20px"
+    marginTop: "10px",
+    width:'95%',
+    marginLeft: "15px"
+    
 
 };
 
@@ -225,19 +228,30 @@ function Layout() {
                                                 onChange={onChangeGoal} />
                                                 <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button> */}
                                         </Card.Text>
+
+                                        {/* <Card.Text>
+                                           
+                                            <EditableTextInput defaultValue={"default"} value={name} 
+                                                             onSave={()=>updateUserRecord()}  setValue ={setName}/>
+                                        </Card.Text> */}
+
                                     </Card.Body>
                                 </Card>
                             </Col>
 
                             <Col md = '6'>
-                            <Timer goal={goal}/>
+                            <Timer goal={goal} />
                             </Col>
                             
                         </Row>
                         <Row> 
-                            <Card style={cardStyle3}>
-                                <MessageSection />
-                            </Card>
+                            
+                                <Card style={cardStyle3}>
+                                    <MessageSection />
+                                </Card>
+                            
+                            
+                            
                         </Row>
                     </Col>
                     </Row>

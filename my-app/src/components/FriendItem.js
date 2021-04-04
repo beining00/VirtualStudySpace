@@ -7,7 +7,8 @@ import LogEvent from './LogEvent'
 function FriendItem(props){
     const {myName,myID,userUID,userName, userStatus, userState} = props;
     console.log(userState);
-    const icon_color = !userState? 'primary' :userState=="offline" ?'primary' : 'green';
+
+    //const icon_color = !userState? 'primary' :userState=="offline" ?'primary' : 'green';
 
     function sendLike(){
         // get the uid for the user 
@@ -31,7 +32,10 @@ function FriendItem(props){
     }
     return (
 
-        <ListGroup.Item><MdPerson style={{ color: icon_color }} />{userName }
+        <ListGroup.Item>
+            {(userState && userState =="online" )? <MdPerson style={{ color: 'green'}} /> : <MdPerson style={{ color: 'primary'}} />}
+        
+            {userName }
 
             {(userState && userState =="online" ) &&
                 (<>

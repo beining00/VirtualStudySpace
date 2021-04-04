@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 
 function LandingPage(){
     return (
-        <Jumbotron fluid>
+        <Jumbotron fluid style={{height:'22vh'}}>
         <Container>
             <h1>Virtual Study Space</h1>
             <p>

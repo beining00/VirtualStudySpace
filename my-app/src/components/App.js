@@ -17,7 +17,10 @@ function App() {
     <div className="App">
       <TopBar /> 
          {/* <Name /> */}
+       
          <LandingPage />
+
+         
          {
           user && ( <Layout /> )
          }

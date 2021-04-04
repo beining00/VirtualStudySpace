@@ -141,13 +141,19 @@ p.message_p {
   position: relative;
   color: white;
   text-align: center;
+  
 }
 
 .message {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
 
 .sent {
   flex-direction: row-reverse;
@@ -161,6 +167,11 @@ p.message_p {
 .received p {
   background: #e5e5ea;
   color: black;
+}
+.chat_username{
+
+  position: absolute;
+  top:1;
 }
 
 img {
@@ -186,3 +197,4 @@ img {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 150%;
 }
+

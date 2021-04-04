@@ -46,6 +46,8 @@ function ChatRoom(props){
 
     // ];
 
+    
+
     const messagesRef = firebase.firestore().collection('messages');
     const query = messagesRef.orderBy('createdAt').limit(25);
   
@@ -53,6 +55,9 @@ function ChatRoom(props){
     console.log(messages);
 
     const dummy = React.useRef();
+    React.useEffect(()=>{
+        dummy.current.scrollIntoView({ behavior: 'smooth' });
+    }, [])
     const [formValue, setFormValue] = React.useState('');
 
     const sendMessage = async (e)=>{

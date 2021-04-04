@@ -66,15 +66,15 @@ function PersonalLog(){
                         _messageList.push({
                             id : messID,
                             uid : messageContent.senderID,
-                            userName : "",
-                            text: "You have send your friend " +messageContent.receiverName + " a like"})
+                            userName : messageContent.senderName ,
+                            text: "I have sent my friend " +messageContent.receiverName + " a like"})
 
                     }else{
                         _messageList.push({
                             id : messID,
                             uid : messageContent.senderID,
-                            userName : "",
-                            text: emoList[getRandomInt(emoList.length)]+ " Your friend " + messageContent.senderName + " send you a like :D"})
+                            userName : "bot",
+                            text:" Your friend " + messageContent.senderName + " sent you a like :D"})
 
                     }
                     
@@ -84,7 +84,7 @@ function PersonalLog(){
                     _messageList.push({
                         uid : '0',
                         userName : "",
-                        text: "Congraduation! you have spent " + messageContent.time + " on "  + messageContent.goal})
+                        text: emoList[getRandomInt(emoList.length)]+  " Congraduation! you have spent " + messageContent.time + " on "  + messageContent.goal})
                 }
             }
 

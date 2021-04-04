@@ -1,5 +1,7 @@
 import React from 'react';
 import Badge from 'react-bootstrap/Badge'
+import Row from 'react-bootstrap/Row';
+
 
 import firebase, {auth} from './Firebase';
 
@@ -9,13 +11,24 @@ function ChatMessage(props) {
     const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
     
     return (<>
-
+    
+     
       <div className={`message ${messageClass}`}>
-          {" "}
-      <Badge pill variant="light">
+        {/* <Row>
+            <div className="chat_username"><Badge pill variant="light">
+            {userName}
+        </Badge></div>
+        </Row>
+        <Row> */}
+        <Badge pill variant="light">
             {userName}
         </Badge>
-        <p className ="message_p">{text}</p>
+        <div class="break"></div>
+        {/* <img src={botLogo}/> */}
+        <p className ="message_p">
+            {text}</p>
+  
+        
       </div>
     </>)
   }
