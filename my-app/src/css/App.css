@@ -38,20 +38,11 @@
 }
 
 
-/* Style buttons */
-.btn {
-  background-color: DodgerBlue; /* Blue background */
-  border: none; /* Remove borders */
-  color: white; /* White text */
-  padding: 12px 16px; /* Some padding */
-  font-size: 16px; /* Set a font size */
-  cursor: pointer; /* Mouse pointer on hover */
-}
 
 /* Darker background on mouse-over */
 .btn:hover {
-  background-color: RoyalBlue;
-}
+  background-color: #82b2d4;
+} */
 
 
 /* style the chat room */
@@ -225,12 +216,18 @@ img {
 .friend_state_btn{
   position : absolute;
   right : 5px;
-  background-color: #d8e7f2;
+  top : 5px;
+  /* background-color: #d8e7f2;*/
+
+ 
+  
 }
 
 .like_btn{
   position : absolute;
-  right : 47px;
-  background-color: #d8e7f2;
+  right : 55px;
+  top : 5px;
+
+  /* background-color: #d8e7f2; */
 }
 

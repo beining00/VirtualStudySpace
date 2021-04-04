@@ -114,11 +114,12 @@ function ChatRoom(props){
             <Card.Text>
        
                     <main className = "chat_main" style= {{'padding-bottom':"4px"}}>
-
+                    
                     {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
 
                     
                     <span ref={dummy}></span>
+                   
                     </main>
                     
 

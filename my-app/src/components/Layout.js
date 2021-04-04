@@ -48,7 +48,7 @@ const cardStyle2 = {
 
 const cardStyle3 = {
    
-    height: "60%",
+    height: "70%",
     //marginTop: "10px",
     width:'95%',
     marginLeft: "15px"
@@ -296,7 +296,7 @@ function Layout() {
                     {/* --------right col of timer + middle section ---------- */}
                    
                         
-                    <Col md = '8' style = {{height : '75vh'}}>
+                    <Col md = '8' >
                         <Row >
                             <Col md = '6'>
                                 <Card style={cardStyle1}>
