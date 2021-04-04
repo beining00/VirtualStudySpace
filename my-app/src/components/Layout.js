@@ -14,6 +14,8 @@ import { MDBInput, MDBCol } from "mdbreact";
 import { GiAchievement } from "react-icons/gi";
 //import { MDBSmoothScroll } from "mdbreact";
 import FriendItem from './FriendItem';
+import PersonalLog from './PersonalLog';
+import Timer from './Timer'
 import MessageSection from './MessageSection';
 import EditableTextInput from './EditableTextInput';
 
@@ -52,21 +54,21 @@ function Layout() {
     const onChangeGoal = (event) => {
         setGoal(event.target.value);
     };
-    // user state  
+    // user state
     const [user] = useAuthState(auth);
 
-    
+
 
 
     const [friendList, setFriendList] = useState([]);
     React.useEffect(() => {
 
-        // toggle user state, online/ offline 
+        // toggle user state, online/ offline
         rtdb_presence();
-        
-        // add listener to the friend items 
+
+        // add listener to the friend items
         var dfRefObj = firebase.database().ref().child('/globalUserStatus');
-        //sync object changes 
+        //sync object changes
         dfRefObj.on('value', snap =>{
             console.log('user record changes ')
             console.log(snap.val());
@@ -78,7 +80,7 @@ function Layout() {
             for (let id in friends){
                 _friendList.push({"uid":id, ...friends[id]});
                 uid2index[id] = index
-                index ++; 
+                index ++;
 
             }
 
@@ -87,7 +89,7 @@ function Layout() {
             }
 
             //_.sortBy(_friendList, [function(o) { return o.state == 'online'?1:0; }]);
-            console.log("final firend list")
+            console.log("final friend list")
             console.log(_friendList);
             setFriendList(_friendList);
 
@@ -100,8 +102,8 @@ function Layout() {
         if (uid != ""){
             firebase.database().ref().child("globalUserStatus/users").child(uid).get().then(function(snapshot) {
                 if (snapshot.exists()) {
-                  
-                    
+
+
                     setName(snapshot.val().UserName)
                     setGoal(snapshot.val().UserStatus)
                 }
@@ -113,10 +115,10 @@ function Layout() {
             });
 
         }
-            
+
 
         // var presenceRefObj = firebase.database().ref().child('status');
-        // //sync object changes 
+        // //sync object changes
         // presenceRefObj.on('value', snap =>{
         //     console.log('user presence changes ')
         //     console.log(snap.val());
@@ -128,7 +130,7 @@ function Layout() {
         //     }
         //     setFriendList(_friendList);
         // })
-        
+
     }, [])
 
     function updateUserRecord(e){
@@ -156,9 +158,8 @@ function Layout() {
     return (
         <div className="LayOut">
             <Container >
-                <Row>  
-                    
-                    <Col style={{ marginRight: "50px" }}>
+                <Row xs="2">
+                    <Col>
                         {/* <MDBSmoothScroll to="listOfFriends">Section 1</MDBSmoothScroll> */}
                         <div>
                         <MDBCol lg="12">
@@ -170,55 +171,53 @@ function Layout() {
 
                                 {_.sortBy(friendList, [function(o) { return o.state == 'online'?0:1; }]).map((friend, index) =>{
 
-                                    // TODO skip the record that is below to the current use 
+                                    // TODO skip the record that is below to the current use
                                     console.log(friend)
                                     return (
                                       <FriendItem myName={name} myID={user.uid} userUID= {friend.uid}
                                       userName={friend.UserName} userStatus={friend.UserStatus} userState={friend.state}/>
                                     )
                                 })}
-                                
+
                             </ListGroup>
                             </Card>
                         </div>
                     </Col>
                     <Col>
-                        <div >
-                            <Card style={cardStyle1}>
-                                <Card.Body>
-                                    <Card.Title>Hello {name}</Card.Title>
-                                    <Card.Text>
-                                        <EditableTextInput defaultValue="Your Name" value={name}  setValue={setName} onSave={(e)=>updateUserRecord(e)} />
-                                        {/* <input type="text" placeholder="What is your name ?" value={name}
-                                            onChange={onChangeName} />
-                                        <Button onClick = {()=>updateUserRecord()}>Submit</Button>  */}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                       
-                            <Card style={cardStyle1}>
-                                <Card.Body>
-                                    <Card.Title>Your Goal<GiAchievement/></Card.Title>
+                        <Row xs="2">
+                            <Col>
+                                <Card style={cardStyle1}>
+                                    <Card.Body>
+                                        <Card.Title>Hello {name}</Card.Title>
+                                        <Card.Text>
+                                            <input type="text" placeholder="What is your name ?" value={name}
+                                                onChange={onChangeName} />
+                                            <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                                <Card style={cardStyle1}>
+                                    <Card.Body>
+                                        <Card.Title>Your Goal<GiAchievement/></Card.Title>
 
-                                    <Card.Text>
-                                        <EditableTextInput defaultValue="Your Goal" value={goal} setValue={setGoal} onSave={(e)=>updateUserRecord(e)} />
-                                        {/* <input type="text" placeholder="What are your goals today" value={goal}
-                                            onChange={onChangeGoal} />
-                                            <Button onClick = {()=>updateUserRecord()}>Submit</Button>  */}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-
+                                        <Card.Text>
+                                            <input type="text" placeholder="What are your goals today" value={goal}
+                                                onChange={onChangeGoal} />
+                                                <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button>
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                            <Timer goal={goal}/>
+                        </Row>
+                        <Row>
                             <Card style={cardStyle3}>
                                 <MessageSection />
                             </Card>
-
-
-                       </div>
-                   </Col>
-                   
+                        </Row>
+                    </Col>
                 </Row>
             </Container>
-        </div>); 
+        </div>);
 }
-export default Layout; 
+export default Layout;
