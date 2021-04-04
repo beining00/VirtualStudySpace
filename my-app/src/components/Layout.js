@@ -15,6 +15,7 @@ import { GiAchievement } from "react-icons/gi";
 //import { MDBSmoothScroll } from "mdbreact";
 import FriendItem from './FriendItem';
 import MessageSection from './MessageSection';
+import EditableTextInput from './EditableTextInput';
 
 import firebase, {auth} from './Firebase';
 import {useAuthState} from 'react-firebase-hooks/auth';
@@ -64,7 +65,7 @@ function Layout() {
         rtdb_presence();
         
         // add listener to the friend items 
-        var dfRefObj = firebase.database().ref().child('/');
+        var dfRefObj = firebase.database().ref().child('/globalUserStatus');
         //sync object changes 
         dfRefObj.on('value', snap =>{
             console.log('user record changes ')
@@ -89,7 +90,30 @@ function Layout() {
             console.log("final firend list")
             console.log(_friendList);
             setFriendList(_friendList);
+
+
+
         })
+
+        //read my Name and my Goal
+        const uid = (user) ? user.uid : "";
+        if (uid != ""){
+            firebase.database().ref().child("globalUserStatus/users").child(uid).get().then(function(snapshot) {
+                if (snapshot.exists()) {
+                  
+                    
+                    setName(snapshot.val().UserName)
+                    setGoal(snapshot.val().UserStatus)
+                }
+                else {
+                console.log("No data available");
+                }
+            }).catch(function(error) {
+                console.error(error);
+            });
+
+        }
+            
 
         // var presenceRefObj = firebase.database().ref().child('status');
         // //sync object changes 
@@ -107,16 +131,18 @@ function Layout() {
         
     }, [])
 
-    function updateUserRecord(){
+    function updateUserRecord(e){
+        console.log("inputChanged")
+        console.log(e)
         console.log("send user record the the database")
         console.log(name)
         console.log(goal)
-        if (name == "" || goal == ""){
+        if (name == "" && goal == ""){
             alert("please fill in your name and goal properly")
         }else{
             const uid = (user) ? user.uid : "";
             if (uid != ""){
-                firebase.database().ref('users/' + uid).set(
+                firebase.database().ref('globalUserStatus/users/' + uid).set(
                     {
                         UserName : name,
                         UserStatus : goal
@@ -147,7 +173,8 @@ function Layout() {
                                     // TODO skip the record that is below to the current use 
                                     console.log(friend)
                                     return (
-                                      <FriendItem userName={friend.UserName} userStatus={friend.UserStatus} userState={friend.state}/>
+                                      <FriendItem myName={name} myID={user.uid} userUID= {friend.uid}
+                                      userName={friend.UserName} userStatus={friend.UserStatus} userState={friend.state}/>
                                     )
                                 })}
                                 
@@ -161,9 +188,10 @@ function Layout() {
                                 <Card.Body>
                                     <Card.Title>Hello {name}</Card.Title>
                                     <Card.Text>
-                                        <input type="text" placeholder="What is your name ?" value={name}
+                                        <EditableTextInput defaultValue="Your Name" value={name}  setValue={setName} onSave={(e)=>updateUserRecord(e)} />
+                                        {/* <input type="text" placeholder="What is your name ?" value={name}
                                             onChange={onChangeName} />
-                                        <Button onClick = {()=>updateUserRecord()}>Submit</Button> 
+                                        <Button onClick = {()=>updateUserRecord()}>Submit</Button>  */}
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
@@ -173,9 +201,10 @@ function Layout() {
                                     <Card.Title>Your Goal<GiAchievement/></Card.Title>
 
                                     <Card.Text>
-                                        <input type="text" placeholder="What are your goals today" value={goal}
+                                        <EditableTextInput defaultValue="Your Goal" value={goal} setValue={setGoal} onSave={(e)=>updateUserRecord(e)} />
+                                        {/* <input type="text" placeholder="What are your goals today" value={goal}
                                             onChange={onChangeGoal} />
-                                            <Button onClick = {()=>updateUserRecord()}>Submit</Button> 
+                                            <Button onClick = {()=>updateUserRecord()}>Submit</Button>  */}
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

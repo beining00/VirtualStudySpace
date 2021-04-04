@@ -9,7 +9,7 @@ function rtdb_presence() {
 
     // Create a reference to this user's specific status node.
     // This is where we will store data about being online/offline.
-    var userStatusDatabaseRef = firebase.database().ref("/presence/" + uid);
+    var userStatusDatabaseRef = firebase.database().ref("globalUserStatus/presence/" + uid);
 
     // We'll create two constants which we will write to 
     // the Realtime database when this device is offline

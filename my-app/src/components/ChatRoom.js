@@ -6,11 +6,14 @@ import 'firebase/firestore';
 import firebase, {auth} from './Firebase';
 import {useAuthState} from 'react-firebase-hooks/auth';
 
+
 //const firestore = firebase.firestore();
 
-function ChatRoom(){
+function ChatRoom(props){
 
-    //const canChat = props.canChat;
+
+
+    const canChat = props.canChat;
   
     const emoList = ['🔥 ',"🎉 ","👏" ];
     // const messages = [
@@ -43,11 +46,11 @@ function ChatRoom(){
 
     // ];
 
-    const [messageList, setMessageList] = React.useState([]);
     const messagesRef = firebase.firestore().collection('messages');
     const query = messagesRef.orderBy('createdAt').limit(25);
   
     const [messages] = useCollectionData(query, { idField: 'id' });
+    console.log(messages);
 
     const dummy = React.useRef();
     const [formValue, setFormValue] = React.useState('');
@@ -61,12 +64,14 @@ function ChatRoom(){
         e.preventDefault();
 
         const { uid } = auth.currentUser;
+        
+
     
         await messagesRef.add({
             text: formValue,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             uid,
-            userName : "Dummy userName"
+            userName : "dummy name"
             })
 
         setFormValue('');
@@ -87,19 +92,23 @@ function ChatRoom(){
 
                     {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
 
+                    
                     <span ref={dummy}></span>
-
                     </main>
+                    
 
                    
+                    {canChat && (
+                        <form className = "chat_form" onSubmit={sendMessage}>
 
-                    <form className = "chat_form" onSubmit={sendMessage}>
-
-                    <input className = "chat_input" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
-
-                    <button className = "chat_button" type="submit" disabled={!formValue}>🕊️</button>
-
-                    </form>
+                        <input className = "chat_input" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="say something nice" />
+    
+                        <button className = "chat_button" type="submit" disabled={!formValue}>🕊️</button>
+    
+                        </form>
+                    )
+                    }
+                    
                         
                   
 

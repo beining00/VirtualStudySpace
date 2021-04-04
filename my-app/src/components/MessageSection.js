@@ -14,7 +14,7 @@ function MessageSection(){
             {/* <Sonnet /> */}
         </Tab>
         <Tab eventKey="profile" title="Global Chat">
-        <ChatRoom />
+        <ChatRoom canChat={true} />
             {/* <Sonnet /> */}
         </Tab>
         </Tabs>

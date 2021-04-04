@@ -56,7 +56,7 @@
 
 /* style the chat room */
 main {
-  padding: 1px;
+  padding: 5px;
   height: 20vh;
   margin: 1vh 0 5vh;
   overflow-y: scroll;

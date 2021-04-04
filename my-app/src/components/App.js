@@ -3,7 +3,6 @@ import '../css/App.css';
 import SignIn from './SignIn';
 import TopBar from './TopBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import FriendListItem from './FriendListItem'
 import Layout from './Layout';
 import LandingPage from './LandingPage'
 import Firebase, {auth} from './Firebase';
