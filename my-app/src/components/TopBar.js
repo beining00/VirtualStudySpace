@@ -22,12 +22,12 @@ function TopBar(){
     return (
         <>
         <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+            <Navbar.Brand href="#home">My Virtual Study Space</Navbar.Brand>
             
             {user ? <SignOut setEmail = {setUserEmail} /> : <SignIn  setEmail = {setUserEmail} />}
             
-            {"   "}
-            <Navbar.Brand href="#home">{userEmail}</Navbar.Brand>
+            
+            <Navbar.Brand href="#home"> {"     "}{userEmail}</Navbar.Brand>
             
 
         </Navbar>

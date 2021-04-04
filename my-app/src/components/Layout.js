@@ -96,8 +96,10 @@ function Layout() {
             console.log('user record changes ')
             //console.log(snap.val());
             console.log("fetch friend list ");
-            
+            console.log(snap.val())
             const userFriends = snap.val().userFriends[uid];
+            
+            
             console.log(userFriends)
             
             
@@ -294,7 +296,7 @@ function Layout() {
                     {/* --------right col of timer + middle section ---------- */}
                    
                         
-                    <Col md = '8'>
+                    <Col md = '8' style = {{height : '75vh'}}>
                         <Row >
                             <Col md = '6'>
                                 <Card style={cardStyle1}>

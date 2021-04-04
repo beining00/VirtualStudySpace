@@ -78,7 +78,7 @@ main::-webkit-scrollbar-thumb {
 
 /* user list scrolling */
 .user_list {
-  height : 71vh;
+  height : 75vh;
   overflow-y: scroll;
 
 }
@@ -225,10 +225,12 @@ img {
 .friend_state_btn{
   position : absolute;
   right : 5px;
+  background-color: #d8e7f2;
 }
 
 .like_btn{
   position : absolute;
-  right : 40px;
+  right : 47px;
+  background-color: #d8e7f2;
 }
 
