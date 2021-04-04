@@ -296,7 +296,11 @@ function Layout() {
                         
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <Col md = '8' >
+=======
+                    <Col md = '8'>
+>>>>>>> parent of 511d42b2 (new authentication)
 =======
                     <Col md = '8'>
 >>>>>>> parent of 511d42b2 (new authentication)
