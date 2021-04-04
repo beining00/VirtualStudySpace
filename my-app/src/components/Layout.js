@@ -48,7 +48,7 @@ const cardStyle2 = {
 
 const cardStyle3 = {
    
-    height: "70%",
+    height: "50%",
     //marginTop: "10px",
     width:'95%',
     marginLeft: "15px"
@@ -294,7 +294,7 @@ function Layout() {
                     {/* --------right col of timer + middle section ---------- */}
                    
 
-                    <Col md = '8' >
+                    <Col md = '8' style={{height:'75hv'}} >
 
                         <Row >
                             <Col md = '6'>
@@ -338,10 +338,13 @@ function Layout() {
                             </Col>
                             
                         </Row>
-                        <Row> 
-                            
-                                <Card style={cardStyle3}>
-                                    <MessageSection userName={name}/>
+                        <Row > 
+                                <Card >
+
+                                    <Card.Body style={cardStyle3} >
+
+                                        <MessageSection userName={name}/>
+                                    </Card.Body>
                                 </Card>
                             
                             

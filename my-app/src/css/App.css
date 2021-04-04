@@ -46,24 +46,24 @@
 
 
 /* style the chat room */
-main {
+.chat_main {
   padding: 5px;
-  height: 20vh;
+  height: 100px;
   margin: 1vh 0 5vh;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
 }
 
-main::-webkit-scrollbar {
+.chat_main::-webkit-scrollbar {
   width: 0.25rem;
 }
 
-main::-webkit-scrollbar-track {
+.chat_main::-webkit-scrollbar-track {
   background:#d8e7f2;
 }
 
-main::-webkit-scrollbar-thumb {
+.chat_main::-webkit-scrollbar-thumb {
   background: #5683a3;
 }
 
@@ -217,6 +217,7 @@ img {
   position : absolute;
   right : 5px;
 
+
   top : 5px;}
   /* background-color: #d8e7f2;*/
 
@@ -229,5 +230,8 @@ img {
 
   right : 55px;
   top : 5px;
+
 }
+
+
 
