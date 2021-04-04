@@ -169,7 +169,7 @@ function Timer(goal) {
 
   return (
   <>
-    <Col Card>
+    <Col>
       <div>
         <Card style={cardStyle2}>
           <Card.Body>
