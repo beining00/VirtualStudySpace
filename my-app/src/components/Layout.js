@@ -16,6 +16,7 @@ import { GiAchievement } from "react-icons/gi";
 import FriendItem from './FriendItem';
 import PersonalLog from './PersonalLog';
 import Timer from './Timer'
+import MessageSection from './MessageSection';
 
 import firebase, {auth} from './Firebase';
 import {useAuthState} from 'react-firebase-hooks/auth';
@@ -184,7 +185,7 @@ function Layout() {
                         </Row>
                         <Row>
                             <Card style={cardStyle3}>
-                                <PersonalLog />
+                                <MessageSection />
                             </Card>
                         </Row>
                     </Col>
