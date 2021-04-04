@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
 import App from './components/App';
+import Timer from './components/Timer';
 //import Timer from './components/Timer';
 
 // ReactDOM.render(
