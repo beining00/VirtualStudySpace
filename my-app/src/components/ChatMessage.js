@@ -11,6 +11,7 @@ function ChatMessage(props) {
     return (<>
 
       <div className={`message ${messageClass}`}>
+          {" "}
       <Badge pill variant="light">
             {userName}
         </Badge>

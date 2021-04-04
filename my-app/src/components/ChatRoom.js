@@ -64,6 +64,25 @@ function ChatRoom(props){
         e.preventDefault();
 
         const { uid } = auth.currentUser;
+        // get the current user name 
+        // if (uid != ""){
+        //     firebase.database().ref().child("globalUserStatus/users").child(uid).get().then(function(snapshot) {
+        //         if (snapshot.exists()) {
+                  
+                    
+        //             setName(snapshot.val().UserName)
+        //             setGoal(snapshot.val().UserStatus)
+        //         }
+        //         else {
+        //         console.log("No data available");
+        //         }
+        //     }).catch(function(error) {
+        //         console.error(error);
+        //     });
+
+        // }
+
+        //const userName = await firebase.database().ref().child("globalUserStatus/users").child(uid).get().val().UserName;
         
 
     
@@ -71,7 +90,7 @@ function ChatRoom(props){
             text: formValue,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             uid,
-            userName : "dummy name"
+            userName : "dummy user"
             })
 
         setFormValue('');
