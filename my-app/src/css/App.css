@@ -192,9 +192,9 @@ img {
 }
 
 .goal_field{
-  height:'100px'; 
-  line-height:'4';
+  height:'100%'; 
+  line-height:'6';
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 150%;
+  font-size: 140%;
 }
 

@@ -57,7 +57,7 @@ function ChatRoom(props){
     const dummy = React.useRef();
     React.useEffect(()=>{
         dummy.current.scrollIntoView({ behavior: 'smooth' });
-    }, [])
+    })
     const [formValue, setFormValue] = React.useState('');
 
     const sendMessage = async (e)=>{

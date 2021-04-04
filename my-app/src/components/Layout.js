@@ -24,10 +24,11 @@ import {useAuthState} from 'react-firebase-hooks/auth';
 
 import rtdb_presence from './rtdb_presence';
 import _ from "lodash";
+import { MdLocationSearching } from "react-icons/md";
 
 const cardStyle1 = {
 
-    marginTop: "10px",
+    //marginTop: "10px",
     height : '40%',
     width : "100%"
 
@@ -47,8 +48,8 @@ const cardStyle2 = {
 
 const cardStyle3 = {
    
-    height: "15rem",
-    marginTop: "10px",
+    height: "80%",
+    //marginTop: "10px",
     width:'95%',
     marginLeft: "15px"
     
@@ -83,8 +84,11 @@ function Layout() {
         //sync object changes
         dfRefObj.on('value', snap =>{
             console.log('user record changes ')
-            console.log(snap.val());
+            //console.log(snap.val());
+            console.log("fetch friend list ");
+            console.log(snap.val().userFriends)
             const _friendList = [];
+            
             const friends = snap.val().users;
             const friendPre = snap.val().presence;
             const uid2index  = {};
@@ -145,6 +149,11 @@ function Layout() {
 
     }, [])
 
+    function searching(e){
+        console.log(e.target.value)
+
+    }
+
     function updateUserRecord(e){
         console.log("inputChanged")
         console.log(e)
@@ -176,12 +185,34 @@ function Layout() {
                         {/* <MDBSmoothScroll to="listOfFriends">Section 1</MDBSmoothScroll> */}
                         <div>
                         {/* <MDBCol lg="10"> */}
-                            <MDBInput hint="Search" type="text" containerClass="active-pink active-pink-2 mt-0 mb-3" />
+                            {/* <MDBInput hint="Search" type="text" containerClass="active-pink active-pink-2 mt-0 mb-3" /> */}
                         {/* </MDBCol> */}
                         {/* <Card style={{ width: '18rem' }}> */}
                         <Card>
-                            <Card.Header>👥 Friends</Card.Header>
+                            <Card.Header>
+                            👥 Friends 
+                            
+                            </Card.Header>
                             <ListGroup id = "ListOfFriends" variant="flush">
+
+                                {_.sortBy(friendList, [function(o) { return o.state == 'online'?0:1; }]).map((friend, index) =>{
+
+                                    // TODO skip the record that is below to the current use
+                                    console.log(friend)
+                                    return (
+                                      <FriendItem myName={name} myID={user.uid} userUID= {friend.uid}
+                                      userName={friend.UserName} userStatus={friend.UserStatus} userState={friend.state}/>
+                                    )
+                                })}
+
+                            </ListGroup>
+                            <Card.Header>
+                            👥 World User 
+                            <MDBInput hint="Search" type="text" containerClass="active-pink active-pink-2 mt-0 mb-3" onChange={(e)=>searching(e)}  />
+                            </Card.Header>
+                            
+                            <ListGroup id = "ListOfFriends" variant="flush">
+                            
 
                                 {_.sortBy(friendList, [function(o) { return o.state == 'online'?0:1; }]).map((friend, index) =>{
 
@@ -212,7 +243,7 @@ function Layout() {
                                                 onChange={onChangeName} />
                                             <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button> */}
                                             <EditableTextInput defaultValue={"default"} value={name} 
-                                                             onSave={()=>updateUserRecord()}  setValue ={setName}/>
+                                                             onSave={()=>updateUserRecord()}  setValue ={setName} rows={1}/>
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -223,7 +254,7 @@ function Layout() {
 
                                         <Card.Text className = 'goal_field'>
                                         <EditableTextInput defaultValue={"default"} value={ goal} 
-                                                             onSave={()=>updateUserRecord()}  setValue ={setGoal}/>
+                                                             onSave={()=>updateUserRecord()}  setValue ={setGoal} rows={2}/>
                                             {/* <input type="text" placeholder="What are your goals today" value={goal}
                                                 onChange={onChangeGoal} />
                                                 <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button> */}
@@ -253,6 +284,7 @@ function Layout() {
                             
                             
                         </Row>
+                        <br/>
                     </Col>
                     </Row>
 
