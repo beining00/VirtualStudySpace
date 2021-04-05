@@ -22,8 +22,11 @@ function changeFriendList(isAdd, receiverUid,myId){
             
 
     }else{
+        if (myId != "" &&  receiverUid != ""){
+            firebase.database().ref('globalUserStatus/userFriends/' + myId + "/" +receiverUid ).set(null)
 
-        firebase.database().ref('globalUserStatus/userFriends/' + myId + "/" +receiverUid ).set(null)
+        }
+        
 
     }
     

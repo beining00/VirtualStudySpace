@@ -39,18 +39,10 @@
 
 
 /* Style buttons */
-.btn {
-  background-color: DodgerBlue; /* Blue background */
-  border: none; /* Remove borders */
-  color: white; /* White text */
-  padding: 12px 16px; /* Some padding */
-  font-size: 16px; /* Set a font size */
-  cursor: pointer; /* Mouse pointer on hover */
-}
 
 /* Darker background on mouse-over */
 .btn:hover {
-  background-color: RoyalBlue;
+  background-color: rgb(197, 204, 223);
 }
 
 
@@ -153,6 +145,7 @@ ul, li {
 }
 
 p.message_p {
+
   max-width: 500px;
   margin-bottom: 12px;
   line-height: 20px;
@@ -162,12 +155,14 @@ p.message_p {
   color: white;
   text-align: center;
   font-size: small;
+
 }
 
 .message {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  
 }
 
 .break {

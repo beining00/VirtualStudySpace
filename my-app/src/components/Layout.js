@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { MDBInput, MDBCol } from "mdbreact";
-
+import {AiOutlineSearch} from "react-icons/ai";
 import { GiAchievement } from "react-icons/gi";
 //import { MDBSmoothScroll } from "mdbreact";
 import FriendItem from './FriendItem';
@@ -57,7 +57,11 @@ const cardStyle3 = {
 };
 
 function Layout() {
-    const [name, setName] = useState("");
+    // user state
+    const [user] = useAuthState(auth);
+
+    const default_name = user.displayName !="" ? user.displayName: user.email.split('@')[0]
+    const [name, setName] = useState(default_name);
     /*const [timer, setTime] =useState*/
     const onChangeName = (event) => {
         setName(event.target.value);
@@ -67,8 +71,7 @@ function Layout() {
     const onChangeGoal = (event) => {
         setGoal(event.target.value);
     };
-    // user state
-    const [user] = useAuthState(auth);
+    
 
 
 
@@ -91,6 +94,7 @@ function Layout() {
 
         // add listener to the friend items
         var dfRefObj = firebase.database().ref().child('/globalUserStatus');
+        
         //sync object changes
         dfRefObj.on('value', snap =>{
             console.log('user record changes ')
@@ -168,8 +172,10 @@ function Layout() {
             firebase.database().ref().child("globalUserStatus/users").child(uid).get().then(function(snapshot) {
                 if (snapshot.exists()) {
 
-
-                    setName(snapshot.val().UserName)
+                    if (snapshot.val().UserName != ""){
+                        setName(snapshot.val().UserName)
+                    }
+                    
                     setGoal(snapshot.val().UserStatus)
                 }
                 else {
@@ -182,19 +188,7 @@ function Layout() {
         }
 
 
-        // var presenceRefObj = firebase.database().ref().child('status');
-        // //sync object changes
-        // presenceRefObj.on('value', snap =>{
-        //     console.log('user presence changes ')
-        //     console.log(snap.val());
-        //     const _globalUserList = [];
-        //     const friends = snap.val();
-        //     for (let id in friends){
-        //         _globalUserList.push({"uid":id, ...friends[id]});
-
-        //     }
-        //     setFriendList(_globalUserList);
-        // })
+ 
 
     }, [])
 
@@ -206,7 +200,8 @@ function Layout() {
         }
         const _newUserList = [];
         for (let i in globalUserList){
-            if (globalUserList[i].UserName.toLowerCase().startsWith(searchContent.toLowerCase())){
+          
+            if (globalUserList[i].UserName && globalUserList[i].UserName.toLowerCase().startsWith(searchContent.toLowerCase())){
                 _newUserList.push(globalUserList[i])
             }
         }
@@ -220,8 +215,9 @@ function Layout() {
         console.log("send user record the the database")
         console.log(name)
         console.log(goal)
-        if (name == "" && goal == ""){
-            alert("please fill in your name and goal properly")
+        if (name == "" ){
+            // by default set name of email 
+            console.log(user)
         }else{
             const uid = (user) ? user.uid : "";
             if (uid != ""){
@@ -249,6 +245,17 @@ function Layout() {
                         {/* </MDBCol> */}
                         {/* <Card style={{ width: '18rem' }}> */}
                         <Card className ="user_list">
+                        <Card.Header className="friend_list_header">
+                                🤓 My Status 
+                            </Card.Header>
+                            <ListGroup id = "ListOfFriends" variant="flush">
+
+                                
+                                <FriendItem myName={name} myID={user.uid} userName={name} userStatus={goal} userState={"online"} isMyself ={true}/>
+                                    
+
+                            </ListGroup>
+
                             <Card.Header className="friend_list_header">
                             👥 Friends 
                             
@@ -259,7 +266,7 @@ function Layout() {
 
                                     // TODO skip the record that is below to the current use
                                     console.log(friend)
-                                    return (
+                                    return (user.uid !=friend.uid) &&(
                                       <FriendItem myName={name} myID={user.uid} userUID= {friend.uid}
                                       userName={friend.UserName} userStatus={friend.UserStatus} userState={friend.state} isFriend ={true}/>
                                     )
@@ -267,8 +274,8 @@ function Layout() {
 
                             </ListGroup>
                             <Card.Header className="friend_list_header">
-                            👥 World User 
-                            <MDBInput hint="Search" type="text" containerClass="active-pink active-pink-2 mt-0 mb-3" onChange={(e)=>setSearchContent(e.target.value)}  />
+                            👥 Search User 
+                            <MDBInput hint="Search " type="text" containerClass="active-pink active-pink-2 mt-0 mb-3" onChange={(e)=>setSearchContent(e.target.value)}  />
                             </Card.Header>
                             
                             <ListGroup id = "ListOfFriends" variant="flush">
@@ -280,8 +287,8 @@ function Layout() {
                                 .map((globalUser, index) =>{
 
                                     // TODO skip the record that is below to the current use
-                                    console.log(globalUser)
-                                    return (
+                                    
+                                    return (user.uid !=globalUser.uid) &&(
                                       <FriendItem myName={name} myID={user.uid} userUID= {globalUser.uid}
                                       userName={globalUser.UserName} userStatus={globalUser.UserStatus} userState={globalUser.state} isFriend ={false}/>
                                     )
@@ -307,18 +314,18 @@ function Layout() {
                                                 onChange={onChangeName} />
                                             <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button> */}
                                             <EditableTextInput defaultValue={"default"} value={name} 
-                                                             onSave={()=>updateUserRecord()}  setValue ={setName} rows={1}/>
+                                                             onSave={()=>updateUserRecord()}  setValue ={setName} rows={1} placeholder={"input your name here"}/>
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
                                 <Card style={cardStyle11}>
                                     <Card.Body>
 
-                                        <Card.Title> 🔥 Your Goal<GiAchievement/></Card.Title>
+                                        <Card.Title> 🔥 Your Current Task </Card.Title>
 
                                         <Card.Text className = 'goal_field'>
                                         <EditableTextInput defaultValue={"default"} value={ goal} 
-                                                             onSave={()=>updateUserRecord()}  setValue ={setGoal} rows={2}/>
+                                                             onSave={()=>updateUserRecord()}  setValue ={setGoal} rows={2} placeholder={"input your task here"}/>
                                             {/* <input type="text" placeholder="What are your goals today" value={goal}
                                                 onChange={onChangeGoal} />
                                                 <Button onClick = {()=>updateUserRecord()} style={{margin:"5px"}}>Submit</Button> */}

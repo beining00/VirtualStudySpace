@@ -5,9 +5,20 @@ import { MDBBadge, MDBContainer } from "mdbreact";
 import LogEvent, {changeFriendList} from './LogEvent'
 
 function FriendItem(props){
-    const {myName,myID,userUID,userName, userStatus, userState, isFriend} = props;
+    const {myName,myID,userUID,userName, userStatus, userState, isFriend, isMyself} = props;
     console.log(userState);
     console.log(userUID)
+    const [iconColor, setIconColor] = React.useState("primary")
+    
+    React.useEffect(()=>{
+        if (userState && userState == "online"){
+            setIconColor('green')
+        }else{
+            setIconColor('primary')
+        }
+        
+
+    }, [])
 
     //const icon_color = !userState? 'primary' :userState=="offline" ?'primary' : 'green';
 
@@ -46,12 +57,12 @@ function FriendItem(props){
     return (
 
         <ListGroup.Item>
-            {(userState && userState =="online" )? <MdPerson style={{ color: 'green'}} /> : <MdPerson style={{ color: 'primary'}} />}
+            <MdPerson style={{ color: iconColor}} /> 
             
             {userName }
 
            
-            {(userState && userState =="online") &&
+            {(userState && userState =="online" && !isMyself) &&
                 (<>
           
                 
@@ -66,15 +77,21 @@ function FriendItem(props){
                 
             }
             {/* remove friend icon */}
-            {isFriend ?
+          
+            {(isFriend && !isMyself)&& (
                 <button class="btn friend_state_btn" onClick = {()=>removeFriend()}><i className="fa fa-folder"></i>
                 <MdRemoveCircleOutline style ={{textAlign: "right", color:"CornflowerBlue", fontSize: '25px'}}/>
                 </button>
-                :<button class="btn friend_state_btn" onClick = {()=>addFriend()}><i className="fa fa-folder"></i>
+            )
+            }
+
+            {(!isFriend && !isMyself)&& (
+                <button class="btn friend_state_btn" onClick = {()=>addFriend()}><i className="fa fa-folder"></i>
                 <MdAddCircleOutline style ={{textAlign: "right", color:"CornflowerBlue", fontSize: '25px'}}/>
                 </button>
-
-            }
+            )}
+               
+               
 
             <br/>
             { (userState && userState =="online") &&

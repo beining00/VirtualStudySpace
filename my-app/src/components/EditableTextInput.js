@@ -14,9 +14,9 @@ function EditableTextInput(props){
     return (
         <div>
             {(props.rows >1)?<EditTextarea defaultValue={props.defaultValue} value={props.value} 
-                className='text_input' onSave={props.onSave} onChange ={inputChange} rows={props.rows} />:
+                className='text_input' onSave={props.onSave} onChange ={inputChange} rows={props.rows} placeholder={props.placeholder}/>:
                 <EditText defaultValue={props.defaultValue} value={props.value} 
-                className='text_input' onSave={props.onSave} onChange ={inputChange}/>
+                className='text_input' onSave={props.onSave} onChange ={inputChange} placeholder={props.placeholder}/>
                 }
         
       </div>

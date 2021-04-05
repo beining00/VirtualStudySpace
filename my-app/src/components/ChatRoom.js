@@ -5,10 +5,12 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import 'firebase/firestore';
 import firebase, {auth} from './Firebase';
 import {useAuthState} from 'react-firebase-hooks/auth';
+import _ from 'lodash';
+import { max } from 'moment';
 
 
 //const firestore = firebase.firestore();
-
+const maxMessage = 30;
 function ChatRoom(props){
 
 
@@ -49,15 +51,16 @@ function ChatRoom(props){
     
 
     const messagesRef = firebase.firestore().collection('messages');
-    const query = messagesRef.orderBy('createdAt').limit(25);
-  
-    const [messages] = useCollectionData(query, { idField: 'id' });
-    console.log(messages);
+    const query = messagesRef.orderBy("createdAt");
 
+    
+    
+    const [messages] = useCollectionData(query, { idField: 'id' });
+   
     const dummy = React.useRef();
     React.useEffect(()=>{
         dummy.current.scrollIntoView({ behavior: 'smooth' });
-    })
+    },[])
     const [formValue, setFormValue] = React.useState('');
 
     const sendMessage = async (e)=>{
@@ -98,6 +101,20 @@ function ChatRoom(props){
             uid,
             userName : props.senderName
             })
+        // delte olde message 
+        if (messages.length >= maxMessage){
+            const numToDelete = messages.length - maxMessage + 1
+            for (let i =0; i<numToDelete;i++){
+                console.log(messages[i].id)
+                messagesRef.doc(messages[i].id).delete().then(() => {
+                    console.log("Document successfully deleted!");
+                }).catch((error) => {
+                    console.error("Error removing document: ", error);
+                });
+            }
+        }
+    
+        
 
         setFormValue('');
         dummy.current.scrollIntoView({ behavior: 'smooth' });
@@ -106,6 +123,7 @@ function ChatRoom(props){
     // console.log("canChat is " + canChat)
 
     // const padding_bottom = canChat? "4px" : "0px";
+    
     
     return (
         <Card.Body>
