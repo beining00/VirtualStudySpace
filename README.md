@@ -10,6 +10,10 @@ cd my-app
 npm install 
 npm start
 ```
+
+## Interface 
+![Uploading image.png…]()
+
 ## Hosting 
-This app is hosted with Firebase. Check out the link below  
+This app is hosted with Firebase. Check out the link below. A Google email account is required in order to sign in.
 https://myvirtualstudyspace.firebaseapp.com/
