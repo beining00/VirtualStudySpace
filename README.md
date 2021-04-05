@@ -10,3 +10,6 @@ cd my-app
 npm install 
 npm start
 ```
+## Hosting 
+This app is hosted with Firebase. Check out the link below  
+https://myvirtualstudyspace.firebaseapp.com/
