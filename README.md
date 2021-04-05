@@ -12,7 +12,8 @@ npm start
 ```
 
 ## Interface 
-![image](https://user-images.githubusercontent.com/55317028/113566368-ea27ed00-964f-11eb-9532-7f4b9f56802e.png)
+![image](https://user-images.githubusercontent.com/55317028/113566522-2c512e80-9650-11eb-8a05-4897e5ad39a4.png)
+
 
 
 ## Hosting 
