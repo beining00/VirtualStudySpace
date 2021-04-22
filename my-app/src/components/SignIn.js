@@ -1,13 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import firebase from './Firebase';
+import firebase , {auth}from './Firebase';
 
-
-
-
-
-
-const auth = firebase.auth();
 
 
 
@@ -33,6 +27,7 @@ function SignOut(props){
 function SignIn(props){
     const setEmail = props.setEmail;
 
+
     const signInwithGoogle  =()=>{
         const provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth()
@@ -46,10 +41,13 @@ function SignIn(props){
                     // The signed-in user info.
                     var user = result.user;
                     // ...
+                    console.log("sign in success")
                     console.log(result)
                     setEmail(result.additionalUserInfo.profile.email);
+                   
                   
                 }).catch((error) => {
+                    console.log(error)
                     // Handle Errors here.
                     var errorCode = error.code;
                     var errorMessage = error.message;
@@ -66,5 +64,5 @@ function SignIn(props){
 
 }
 
-export {SignOut, auth}; 
+export {SignOut}; 
 export default SignIn; 
